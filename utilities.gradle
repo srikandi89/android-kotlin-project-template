@@ -1,0 +1,16 @@
+
+def loadCustomProperties(String filePath) {
+    def properties = new Properties()
+    def file = file(filePath)
+    if (file.canRead()) {
+        properties.load(new FileInputStream(file))
+        return properties
+    }
+    else {
+        return null
+    }
+}
+
+ext {
+    loadCustomProperties = this.&loadCustomProperties
+}

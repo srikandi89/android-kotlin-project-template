@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: "$rootDir/dependencies.gradle"
+apply from: "$rootDir/utilities.gradle"
 
 android {
     compileSdkVersion 29
@@ -21,6 +22,38 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+    }
+
+    def configProp = loadCustomProperties("$rootDir/config.properties")
+    println(configProp)
+
+    flavorDimensions "countries"
+
+    productFlavors {
+        en {
+            dimension "countries"
+            applicationId "com.srikandi.android.en"
+            minSdkVersion 16
+            targetSdkVersion 29
+            versionCode 1
+            versionName "1.0"
+            buildConfigField "String", "HOST_URL", configProp["HOST_URL_PROD_EN"]
+        }
+
+        id {
+            dimension "countries"
+            applicationId "com.srikandi.android.id"
+            minSdkVersion 16
+            targetSdkVersion 29
+            versionCode 1
+            versionName "1.0"
+            buildConfigField "String", "HOST_URL", configProp["HOST_URL_PROD_ID"]
         }
     }
 }
