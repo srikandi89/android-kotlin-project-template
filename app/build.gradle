@@ -33,38 +33,41 @@ android {
     def configProp = loadCustomProperties("$rootDir/config.properties")
     println(configProp)
 
-    flavorDimensions "countries"
+    flavorDimensions "countries", "environment"
 
-
-    /**
-     * Define product flavor for different countries.
-     * minSdk, targetSdk, versionCode, and versionName will be follows defaultConfig.
-     * Add variant variables related of application config here.
-     * E.g : HOST_URL
-     */
     productFlavors {
-        prod_en {
+        /**
+         * Define product flavor for different countries.
+         * minSdk, targetSdk, versionCode, and versionName will be follows defaultConfig.
+         * Define variant related to countries
+         * E.g : application name, resources
+         */
+        en {
             dimension "countries"
             applicationId "com.srikandi.android.en"
-            buildConfigField "String", "HOST_URL", configProp["HOST_URL_PROD_EN"]
+            resValue "string", "app_name", "Demo App"
         }
 
-        prod_id {
+        idn {
             dimension "countries"
             applicationId "com.srikandi.android.id"
-            buildConfigField "String", "HOST_URL", configProp["HOST_URL_PROD_ID"]
+            resValue "string", "app_name", "Demo App 1"
         }
 
-        stg_en {
-            dimension "countries"
-            applicationId "com.srikandi.android.en"
-            buildConfigField "String", "HOST_URL", configProp["HOST_URL_STG_EN"]
+
+        /**
+         * Define product flavor for different environment.
+         * Add variant related build environment.
+         * E.g : HOST_URL
+         */
+        prod {
+            dimension "environment"
+            buildConfigField "String", "HOST_URL", configProp["HOST_URL_PROD"]
         }
 
-        stg_id {
-            dimension "countries"
-            applicationId "com.srikandi.android.id"
-            buildConfigField "String", "HOST_URL", configProp["HOST_URL_STG_ID"]
+        stg {
+            dimension "environment"
+            buildConfigField "String", "HOST_URL", configProp["HOST_URL_STG"]
         }
     }
 }

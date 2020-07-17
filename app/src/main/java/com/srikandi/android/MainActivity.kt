@@ -9,6 +9,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        textview_message.text = BuildConfig.HOST_URL
+        val appName = "${getString(R.string.app_name)} ${getString(R.string.mainactivity_textview_title)}"
+
+        mainactivity_textview_title.text = appName
+        mainactivity_textview_message.text = BuildConfig.HOST_URL
     }
 }
