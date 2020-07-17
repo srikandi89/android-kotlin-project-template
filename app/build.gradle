@@ -35,25 +35,36 @@ android {
 
     flavorDimensions "countries"
 
+
+    /**
+     * Define product flavor for different countries.
+     * minSdk, targetSdk, versionCode, and versionName will be follows defaultConfig.
+     * Add variant variables related of application config here.
+     * E.g : HOST_URL
+     */
     productFlavors {
-        en {
+        prod_en {
             dimension "countries"
             applicationId "com.srikandi.android.en"
-            minSdkVersion 16
-            targetSdkVersion 29
-            versionCode 1
-            versionName "1.0"
             buildConfigField "String", "HOST_URL", configProp["HOST_URL_PROD_EN"]
         }
 
-        id {
+        prod_id {
             dimension "countries"
             applicationId "com.srikandi.android.id"
-            minSdkVersion 16
-            targetSdkVersion 29
-            versionCode 1
-            versionName "1.0"
             buildConfigField "String", "HOST_URL", configProp["HOST_URL_PROD_ID"]
+        }
+
+        stg_en {
+            dimension "countries"
+            applicationId "com.srikandi.android.en"
+            buildConfigField "String", "HOST_URL", configProp["HOST_URL_STG_EN"]
+        }
+
+        stg_id {
+            dimension "countries"
+            applicationId "com.srikandi.android.id"
+            buildConfigField "String", "HOST_URL", configProp["HOST_URL_STG_ID"]
         }
     }
 }
